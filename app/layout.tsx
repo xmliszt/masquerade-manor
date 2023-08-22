@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AuthProvider } from '@/components/auth-provider';
+import { Toaster } from '@/components/ui/toaster';
 
 // Metadata for SEO
 export const metadata: Metadata = {
@@ -83,6 +84,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <AuthProvider>{children}</AuthProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

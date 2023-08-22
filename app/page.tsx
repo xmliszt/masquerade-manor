@@ -23,6 +23,7 @@ export default function Home() {
             </Avatar>
           )}
           <h1 className='text-3xl font-extrabold'>Hello! {user.name}</h1>
+          <h1 className='text-3xl font-extrabold'>{user.email}</h1>
         </div>
       )}
       <div className='absolute top-4 right-2 flex flex-row gap-2'>
