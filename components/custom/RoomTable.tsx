@@ -34,7 +34,9 @@ export function RoomTable() {
 
   return (
     <>
-      <Button onClick={onAddRoom}>Add Room</Button>
+      <Button className='mb-4' onClick={onAddRoom}>
+        Add Room
+      </Button>
       <Table>
         <TableHeader>
           <TableRow>
