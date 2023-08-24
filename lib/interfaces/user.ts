@@ -3,4 +3,5 @@ export default interface IUser {
   image?: string;
   email?: string;
   lastLoginAt?: Date;
+  lastLogoutAt?: Date;
 }

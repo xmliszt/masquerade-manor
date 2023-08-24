@@ -7,6 +7,7 @@ import {
   createUserProfile,
   isUserExist,
   updateUserLastLogin,
+  updateUserLastLogout,
 } from '@/services/userService';
 import { useToast } from '../ui/use-toast';
 
@@ -69,7 +70,16 @@ export function Authentication({ onSessionUpdated }: AuthenticationProps) {
   };
 
   const onSignOut = () => {
-    signOut();
+    signOut().then(async () => {
+      if (session?.user?.email) {
+        try {
+          await updateUserLastLogout(session.user.email, new Date());
+        } catch (error) {
+          console.error('Unable to update user last logout!');
+          console.error(error);
+        }
+      }
+    });
   };
 
   return status === 'authenticated' ? (

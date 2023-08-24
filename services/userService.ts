@@ -15,6 +15,15 @@ export const updateUserLastLogin = async (email: string, lastLoginAt: Date) => {
   });
 };
 
+export const updateUserLastLogout = async (
+  email: string,
+  lastLogoutAt: Date
+) => {
+  await updateDoc(doc(firestore, 'users', email), {
+    lastLogoutAt,
+  });
+};
+
 export const isUserExist = async (email: string): Promise<boolean> => {
   const ref = await getDoc(doc(firestore, 'users', email));
   return ref.exists();

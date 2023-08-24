@@ -18,7 +18,7 @@ export default function Home() {
         <div className='absolute top-4 flex flex-col gap-4 justify-start items-center w-full'>
           {user.image && (
             <Avatar className='w-20 h-20 drop-shadow-lg'>
-              <AvatarImage src={user.image} />
+              <AvatarImage referrerPolicy='no-referrer' src={user.image} />
               <AvatarFallback>Profile Image</AvatarFallback>
             </Avatar>
           )}
