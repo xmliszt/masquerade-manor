@@ -13,20 +13,8 @@ export default function Home() {
   const user = userSession?.user;
 
   return (
-    <main className='relative w-full h-screen flex justify-center items-center'>
-      {user && (
-        <div className='absolute top-4 flex flex-col gap-4 justify-start items-center w-full'>
-          {user.image && (
-            <Avatar className='w-20 h-20 drop-shadow-lg'>
-              <AvatarImage referrerPolicy='no-referrer' src={user.image} />
-              <AvatarFallback>Profile Image</AvatarFallback>
-            </Avatar>
-          )}
-          <h1 className='text-3xl font-extrabold'>Hello! {user.name}</h1>
-          <h1 className='text-3xl font-extrabold'>{user.email}</h1>
-        </div>
-      )}
-      <div className='absolute top-4 right-2 flex flex-row gap-2'>
+    <main className='relative w-full h-screen flex flex-col gap-2 items-center'>
+      <div className='fixed top-4 right-2 flex flex-row gap-2'>
         <ThemeToggle />
         <Authentication
           onSessionUpdated={(session) => {
@@ -34,7 +22,21 @@ export default function Home() {
           }}
         />
       </div>
-      <div className='w-4/5 h-3/5'>
+      {user && (
+        <div className='my-4 flex flex-col gap-4 justify-start items-center w-full'>
+          {user.image && (
+            <Avatar className='w-20 h-20 drop-shadow-lg'>
+              <AvatarImage referrerPolicy='no-referrer' src={user.image} />
+              <AvatarFallback>Profile Image</AvatarFallback>
+            </Avatar>
+          )}
+          <h1 className='text-2xl leading-4 font-extrabold'>
+            Hello! {user.name}
+          </h1>
+          <h1 className='text-base italic'>{user.email}</h1>
+        </div>
+      )}
+      <div className='px-4 w-full'>
         <RoomTable />
       </div>
     </main>

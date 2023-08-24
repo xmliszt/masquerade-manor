@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/table';
 import { useRooms } from '@/hooks/roomHook';
 import { Button } from '../ui/button';
+import DateFormats from '@/lib/utils/dateUtils';
 import moment from 'moment';
 
 export function RoomTable() {
@@ -20,7 +21,7 @@ export function RoomTable() {
       _id: String(new Date().getTime()),
       name: 'Hello World',
       createdBy: 'Me',
-      createdAt: new Date(),
+      createdAt: moment(new Date()).format(DateFormats.room),
       status: 'open',
       capacity: 10,
       playersCount: 2,
@@ -34,7 +35,7 @@ export function RoomTable() {
 
   return (
     <>
-      <Button className='mb-4' onClick={onAddRoom}>
+      <Button className='mb-4 w-full' onClick={onAddRoom}>
         Add Room
       </Button>
       <Table>
@@ -50,10 +51,8 @@ export function RoomTable() {
           {rooms.map((room) => (
             <TableRow key={room._id}>
               <TableCell width='120px'>{room.name}</TableCell>
-              <TableCell>{`${room.status} [${room.playersCount}/${room.capacity}]`}</TableCell>
-              <TableCell>
-                {moment(room.createdAt).format('Do MMM yyyy HH:mm:ss')}
-              </TableCell>
+              <TableCell width='200px'>{`${room.status} [${room.playersCount}/${room.capacity}]`}</TableCell>
+              <TableCell>{room.createdAt}</TableCell>
               <TableCell className='text-right'>
                 <Button
                   onClick={() => {

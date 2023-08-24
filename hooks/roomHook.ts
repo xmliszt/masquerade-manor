@@ -10,6 +10,7 @@ export const useRooms = () => {
     const roomRef = ref(database, 'rooms/');
     onValue(roomRef, (snapshot) => {
       const data = snapshot.val();
+      if (!data) return;
       const rooms = Object.values(data) as IRoom[] | null | undefined;
       if (rooms) {
         setRooms(rooms);
