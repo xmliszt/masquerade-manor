@@ -22,15 +22,15 @@ export function RoomTable() {
       name: 'Hello World',
       createdBy: 'Me',
       createdAt: moment(new Date()).format(DateFormats.room),
-      status: 'open',
+      status: 'OPEN',
       capacity: 10,
       playersCount: 2,
       visibility: 'public',
     });
   };
 
-  const onUpdateRoom = (roomID: string, currentStatus: 'open' | 'in_game') => {
-    updateRoomStatus(roomID, currentStatus === 'open' ? 'in_game' : 'open');
+  const onUpdateRoom = (roomID: string, currentStatus: RoomState) => {
+    updateRoomStatus(roomID, currentStatus === 'OPEN' ? 'IN GAME' : 'OPEN');
   };
 
   return (
@@ -51,7 +51,11 @@ export function RoomTable() {
           {rooms.map((room) => (
             <TableRow key={room._id}>
               <TableCell width='120px'>{room.name}</TableCell>
-              <TableCell width='200px'>{`${room.status} [${room.playersCount}/${room.capacity}]`}</TableCell>
+              <TableCell width='200px'>
+                {room.status === 'OPEN'
+                  ? `${room.status} [${room.playersCount}/${room.capacity}]`
+                  : `${room.status}`}
+              </TableCell>
               <TableCell>{room.createdAt}</TableCell>
               <TableCell className='text-right'>
                 <Button
@@ -59,7 +63,7 @@ export function RoomTable() {
                     onUpdateRoom(room._id, room.status);
                   }}
                 >
-                  Join
+                  {room.status === 'IN GAME' ? 'Leave' : 'Join'}
                 </Button>
               </TableCell>
             </TableRow>

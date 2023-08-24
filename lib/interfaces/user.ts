@@ -1,7 +1,8 @@
 export default interface IUser {
   name: string;
+  email: string;
   image?: string | null;
-  email?: string;
+  state: UserState;
   lastLoginAt?: Date;
   lastLogoutAt?: Date;
 }

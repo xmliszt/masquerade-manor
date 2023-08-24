@@ -3,7 +3,7 @@ export default interface IRoom {
   name: string;
   createdBy: string; // User
   createdAt: string;
-  status: 'open' | 'in_game';
+  status: RoomState;
   capacity: number;
   playersCount: number;
   visibility: 'public' | 'private';

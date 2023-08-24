@@ -8,6 +8,7 @@ import {
   isUserExist,
   updateUserLastLogin,
   updateUserLastLogout,
+  updateUserState,
 } from '@/services/userService';
 import { useToast } from '../ui/use-toast';
 
@@ -24,11 +25,13 @@ export function Authentication({ onSessionUpdated }: AuthenticationProps) {
     async (name: string, email: string, image?: string | null) => {
       if (await isUserExist(email)) {
         await updateUserLastLogin(email, new Date());
+        await updateUserState(email, 'IDLE');
       } else {
         await createUserProfile({
           name,
           email,
           image,
+          state: 'IDLE',
           lastLoginAt: new Date(),
         });
       }
@@ -75,9 +78,11 @@ export function Authentication({ onSessionUpdated }: AuthenticationProps) {
 
   const onSignOut = async () => {
     try {
+      if (session?.user?.email) {
+        await updateUserLastLogout(session.user.email, new Date());
+        await updateUserState(session.user.email, 'OFFLINE');
+      }
       await signOut();
-      session?.user?.email &&
-        (await updateUserLastLogout(session.user.email, new Date()));
     } catch (error) {
       console.error(error);
     }

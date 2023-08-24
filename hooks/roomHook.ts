@@ -23,10 +23,7 @@ export const useRooms = () => {
     set(addRef, room);
   };
 
-  const updateRoomStatus = async (
-    roomID: string,
-    status: 'open' | 'in_game'
-  ) => {
+  const updateRoomStatus = async (roomID: string, status: RoomState) => {
     const updateRef = ref(database, 'rooms/' + roomID);
     update(updateRef, { status });
   };
